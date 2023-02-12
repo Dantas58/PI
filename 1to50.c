@@ -454,5 +454,161 @@ void somasAc (int v[], int Ac [], int N){
 
 // 39
 int triSup (int N, float m [N][N]){
+
+    int i, j;
+
+    for (i=0 ; i<N ; i++)
+        for (j=i+1 ; j<N ; j++)
+            if (m[i][i] == 0 || m[j][i] != 0) return 0;
+
+    return 1;
+}
+
+
+// 40
+void transposta (int N, float m [N][N]){
+
+    int i,j;
+    for(i=0; i<N; i++){
+        for(j=i+1; j<N; j++){
+            int aux = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = aux;
+        }
+    }
+}
+
+
+// 41
+void addTo (int N, int M, int a [N][M], int b[N][M]){
+
+    int i, j;
+    for(i=0; i<N; i++)
+        for(j=0; j<M; j++)
+            a[i][j] += b[i][j];
+}
+
+
+// 42
+int unionSet (int N, int v1[N], int v2[N], int r[N]){
+
+    int i;
+    for(i=0; i<N; i++) if(v1[i] || v2[i]) r[i] = 1;
+
+    return 1;
+}
+
+
+// 43
+int intersectSet (int N, int v1[N], int v2[N], int r[N]){
+
+    int i;
+    for(i=0; i<N; i++) r[i] = (v1[i]&&v2[i]);
+
+    return 1;
+}
+
+
+// 44
+int intersectMSet (int N, int v1[N], int v2[N], int r[N]){
+
+    int i;
+    for(i=0; i<N; i++){
+        if(v1[i] && v2[i]){
+            if(v1[i]<v2[i]) r[i] = v1[i];
+            else r[i] = v2[i];
+        }    
+    }
+    return 1;
+}
+
+
+// 45
+int unionMSet (int N, int v1[N], int v2[N], int r[N]){
+
+    int i;
+    for(i=0; i<N; i++){
+        if(v1[i] || v2[i]){
+            if(v1[i]<v2[i]) r[i] = v2[i];
+            else r[i] = v1[i];
+        }    
+    }
+    return 1;
+}
+
+
+// 46
+int cardinalMSet (int N, int v[N]){
+
+    int i, r=0;
+    for(i=0; i<N; i++) r += v[i];
+
+    return r;
+}
+
+
+// 47 
+typedef enum movimento {Norte, Oeste, Sul, Este} Movimento;
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+Posicao posFinal (Posicao inicial, Movimento mov[], int N){
+
+    int i;
+    Posicao final = inicial;
+    for(i=0; i<N; i++){
+        if(mov[i] == Norte) final.y++;
+        else if(mov[i] == Sul) final.y--;
+        else if(mov[i] == Este) final.x++;
+        else if(mov[i] == Oeste) final.x--;
+    }
+    return final;
+}
+
+
+// 48
+int caminho (Posicao inicial, Posicao final, Movimento mov[], int N){
+
+    int i=0;
+    Posicao aux = inicial;
     
+    while(i<=N && (final.x!=aux.x || final.y!=aux.y)){
+
+        if(aux.y > final.y){aux.y--; mov[i]=Sul; i++;}
+        else if(aux.y<final.y){aux.y++; mov[i]=Norte; i++;}
+
+        if(aux.x > final.x){aux.x--; mov[i]=Oeste; i++;}
+        else if(aux.x<final.x){aux.x++; mov[i]=Este; i++;}
+    }
+
+    if(i>N) return -1;
+
+    return i;
+}
+
+
+// 49
+int maisCentral (Posicao pos[], int N){
+
+    int i, j;
+    int min = __INT_MAX__;
+    int r = -1;
+    for(i=0; i<N; i++){
+        j = abs(pos[i].x) + abs(pos[i].y);
+        if(j < min){min = j; r = i;}
+    }
+    return r;
+}
+
+
+// 50
+int vizinhos (Posicao p, Posicao pos[], int N){ // nao funfatings nao sei porque
+
+    int i, r = 0;
+    for(i=0; i<N; i++){
+        if(( (abs(p.x - pos[i].x)==1 && abs(p.y - pos[i].y)==0) || (abs(p.x - pos[i].x)==0 && abs(p.y - pos[i].y)==1)) 
+        && (p.x!=pos[i].x && p.y!=pos[i].y)) r++;
+    }
+    return r;
 }
