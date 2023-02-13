@@ -190,8 +190,13 @@ int maiorSufixo (char s1 [], char s2 []){
 
 
 // 19
-int sufPref (char s1[], char s2[]){ // standby
-
+int sufPref (char s1[], char s2[]) {
+    int ans = 0, i, j = 0;
+    for(i = 0; s1[i]; i++) {
+        if(s1[i] == s2[j++]) ans++;     // vai procurando ate serem iguais e caso deixem de ser 
+        else ans = j = 0;               // da reset para 0 
+    }
+    return ans;
 }
 
 
