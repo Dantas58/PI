@@ -568,10 +568,16 @@ int freeAB (ABin t){
 // 86
 int pruneAB (ABin *t, int l){
 
-    int i = l;
-    int copiat = *t;
+    int r;
+    if(!*t) return 0;
 
-    
+    if(l==0){
+        r = 1 + pruneAB(&(*t)->esq, l) + pruneAB(&(*t)->dir, l);
+        free(*t);
+    }
+    else r = pruneAB(&(*t)->esq, l-1) + pruneAB(&(*t)->dir, l-1);
+
+    return r;
 }
 
 
@@ -588,3 +594,7 @@ int iguaisAB (ABin a, ABin b){
 
 
 // 88 
+LInt nivelL (ABin t, int n){
+
+    
+}
