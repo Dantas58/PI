@@ -480,3 +480,111 @@ LInt parte (LInt l){
 
     
 }
+
+
+// ARVORES BINARIAS // 
+
+typedef struct nodo {
+    int valor;
+    struct nodo *esq, *dir;
+} *ABin;
+
+
+// 78
+int max (int x, int y){
+    if(x>y) return x;
+    return y;
+}
+
+int altura (ABin t){
+
+    if(!t) return 0;
+
+    return(1 + max(altura (t->esq), altura(t->dir)));
+}
+
+
+// 79
+ABin cloneAB (ABin t){
+
+    if(!t) return NULL;
+    ABin nodo = malloc(sizeof(ABin));
+    nodo->valor = t->valor;
+    nodo->esq = cloneAB(t->esq);
+    nodo->dir = cloneAB(t->dir);
+
+    return nodo;
+}
+
+
+// 80
+void mirror (ABin *t){
+
+    if(!*t) return;
+
+    ABin aux = (*t)->esq;
+    (*t)->esq = (*t)->dir;
+    (*t)->dir = aux;
+    mirror(&(*t)->esq);
+    mirror(&(*t)->dir);
+}
+
+
+// 81
+void inorder (ABin t, LInt *l){ // estas sao tao chatas
+
+}
+
+
+// 82
+void preorder (ABin t, LInt *l){
+
+}
+
+
+// 83
+void posorder (ABin t, LInt *l){
+
+}
+
+
+// 84
+int depth (ABin t, int x){
+
+}
+
+
+// 85
+int freeAB (ABin t){
+
+    if(!t) return 0;
+
+    int r = 1 + freeAB(t->esq) + freeAB(t->dir);
+    free(t);
+    return(r);
+}
+
+
+// 86
+int pruneAB (ABin *t, int l){
+
+    int i = l;
+    int copiat = *t;
+
+    
+}
+
+
+// 87
+int iguaisAB (ABin a, ABin b){
+
+    if(!a && !b) return 1;
+    if( (a && !b) || (!a && b) ) return 0;
+
+    if(a->valor == b->valor) return (iguaisAB(a->esq, b->esq) && iguaisAB(a->dir, b->dir));
+
+    return 0;
+}
+
+
+// 88 
