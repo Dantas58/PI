@@ -598,3 +598,36 @@ LInt nivelL (ABin t, int n){
 
     
 }
+
+
+
+// 92
+int contaFolhas (ABin t){
+
+    if(!t) return 0;
+
+    if(!t->esq && !t->dir) return 1;
+
+    return (contaFolhas(t->esq)+contaFolhas(t->dir));
+}
+
+
+// 93
+ABin cloneMirror (ABin t){
+
+    if(!t) return NULL;
+
+    ABin new = malloc(sizeof(ABin));
+    new->valor = t->valor;
+    new->esq = cloneMirror(t->dir);
+    new->dir = cloneMirror(t->esq);
+
+    return new;
+}
+
+
+// 94
+int addOrd (ABin *a, int x){
+
+    ABin copia = *a;
+}
