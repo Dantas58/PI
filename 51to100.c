@@ -629,5 +629,103 @@ ABin cloneMirror (ABin t){
 // 94
 int addOrd (ABin *a, int x){
 
-    ABin copia = *a;
 }
+
+
+// 95
+int lookupAB (ABin t, int x){
+
+    if(!t) return 0;
+    return(t->valor == x || lookupAB(t->esq, x) || lookupAB(t->dir, x));
+}
+
+
+// 96
+int depthOrd (ABin t, int x){
+
+    
+}
+
+
+// 97
+int maiorAB (ABin t){
+
+    if(!t) return 0;
+
+    while(t->dir) t=t->dir;
+
+    return t->valor;
+}
+
+
+// 98
+void removeMaiorA (ABin *t){
+    
+    if(!*t) return;
+
+    if(!(*t)->dir){*t = (*t)->esq; return;}
+
+    ABin copiat = (*t)->dir;
+    ABin ant = *t;
+    while(copiat->dir){
+        ant = copiat;
+        copiat = copiat->dir;
+    }
+
+    ant->dir = copiat->esq;
+}
+
+
+// 99 
+int quantos (ABin t){
+
+    if(!t) return 0;
+    return(1+quantos(t->esq)+quantos(t->dir));
+}
+
+int quantosMaiores (ABin t, int x){
+
+    if(!t) return 0;
+    
+    if(t->valor > x) return(1+quantosMaiores(t->esq, x)+quantos(t->dir));
+    else return(quantosMaiores(t->dir, x));
+}
+
+
+// 100
+
+
+
+// 101
+int menores (ABin t, int x){
+
+    if(!t) return 1;
+    //if(!t->esq) return 1;
+
+    if(t->valor >= x) return 0;
+
+    return (menores(t->esq, x) && menores(t->dir, x));
+}
+
+int maiores (ABin t, int x){
+
+    if(!t) return 1;
+    //if(!t->dir) return 1;
+
+    if(t->valor <= x) return 0;
+
+    return (maiores(t->esq, x) && maiores(t->dir, x));
+}
+
+int deProcura (ABin t){
+
+    if(!t) return 1;
+
+    ABin left = t->esq;
+    ABin right = t->dir;
+    
+    if(menores(left, t->valor) && maiores(right, t->valor)) return (deProcura(t->esq) && deProcura(t->dir));
+
+    return 0;
+}
+
