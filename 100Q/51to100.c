@@ -600,6 +600,24 @@ LInt nivelL (ABin t, int n){
 }
 
 
+// 91
+int somaSubarvore(ABin t) {
+    if (!t) return 0;
+    return t->valor + somaSubarvore(t->esq) + somaSubarvore(t->dir);
+}
+
+ABin somasAcA(ABin t) {
+    
+    if (!t) return t;
+    
+    ABin node = (ABin) malloc(sizeof(ABin));
+    node->valor = somaSubarvore(t);
+    node->esq = somasAcA(t->esq);
+    node->dir = somasAcA(t->dir);
+
+    return node;
+}
+
 
 // 92
 int contaFolhas (ABin t){
@@ -627,8 +645,13 @@ ABin cloneMirror (ABin t){
 
 
 // 94
-int addOrd (ABin *a, int x){
+int addOrd (ABin *a, int x){ // admito derrota
 
+    if(!*a) return 0;
+
+    ABin copia = *a;
+
+    
 }
 
 
@@ -643,9 +666,25 @@ int lookupAB (ABin t, int x){
 // 96
 int depthOrd (ABin t, int x){
 
-    
-}
+    if(!t) return -1;
 
+    ABin copiat = t;
+    int cont = 1;
+    while(copiat->valor != x){
+        
+        if(copiat->valor > x && copiat->esq){
+            copiat = copiat->esq;
+            cont++;
+        }
+        
+        else if(copiat->dir){
+            copiat = copiat->dir;
+            cont++;
+        }
+        else return -1;
+    }
+    return cont;
+}
 
 // 97
 int maiorAB (ABin t){
