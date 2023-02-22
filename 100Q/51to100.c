@@ -410,6 +410,16 @@ LInt arrayToList (int v[], int N){
     return l;
 }
 
+LInt arrayToList (int v[], int N){  // versão recursiva mais simples
+
+    if(N<=0) return NULL;
+
+    LInt l = malloc(sizeof(LInt));
+    l->valor = v[0];
+    l->prox = arrayToList(v+1, N-1);
+
+    return l;
+}
 
 // 74
 LInt somasAcL (LInt l){     // codeboard da erro mas acho que é isto
