@@ -595,7 +595,7 @@ int pruneAB (ABin *t, int l){
 int iguaisAB (ABin a, ABin b){
 
     if(!a && !b) return 1;
-    if( (a && !b) || (!a && b) ) return 0;
+    if( (a && !b) || (!a && b) ) return 1;
 
     if(a->valor == b->valor) return (iguaisAB(a->esq, b->esq) && iguaisAB(a->dir, b->dir));
 

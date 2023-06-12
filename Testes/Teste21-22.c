@@ -137,3 +137,14 @@ int sacos(int p[], int N, int C){   // nao sei mas acho que faz senso
     return (total/C + 1);
 }
 
+int main() {
+    int weights[] = {3,3,3,3,5,5,11};
+    int numItems = sizeof(weights) / sizeof(weights[0]);
+    int bagCapacity = 11;
+
+    int numBags = sacos(weights, numItems, bagCapacity);
+
+    printf("Number of bags needed: %d\n", numBags);
+
+    return 0;
+}
